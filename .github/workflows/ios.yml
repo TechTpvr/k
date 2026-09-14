@@ -1,0 +1,53 @@
+name: Build iOS
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    tags: ['v*']
+
+permissions:
+  contents: read
+
+jobs:
+  ios:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build web app
+        run: npm run build
+
+      - name: Add Capacitor iOS
+        run: npx cap add ios
+
+      - name: Generate iOS icons
+        run: npx capacitor-assets generate --iconPath logo-app.png
+
+      - name: Sync Capacitor
+        run: npx cap sync ios
+
+      - name: Install CocoaPods
+        working-directory: ios/App
+        run: pod install
+
+      - name: Archive iOS app (unsigned)
+        working-directory: ios/App
+        run: |
+          xcodebuild -workspace App.xcworkspace             -scheme App             -configuration Release             -sdk iphoneos             -archivePath "$RUNNER_TEMP/KifNet-v9.xcarchive"             archive             CODE_SIGNING_ALLOWED=NO             CODE_SIGNING_REQUIRED=NO
+
+      - name: Upload iOS archive
+        uses: actions/upload-artifact@v4
+        with:
+          name: kifnet-v9-ios-archive
+          path: ${{ runner.temp }}/KifNet-v9.xcarchive
