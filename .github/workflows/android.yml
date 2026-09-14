@@ -41,6 +41,9 @@ jobs:
       - name: Install dependencies
         run: npm install --no-audit --no-fund
 
+      - name: Prepare bundled Persian font
+        run: node scripts/prepare-fonts.cjs
+
       - name: Build web app
         run: npm run build
 
@@ -51,6 +54,19 @@ jobs:
 
       - name: Add Capacitor Android
         run: npx cap add android
+
+      - name: Apply KifNet app icon
+        run: |
+          set -e
+          for size_dir in mipmap-mdpi:48 mipmap-hdpi:72 mipmap-xhdpi:96 mipmap-xxhdpi:144 mipmap-xxxhdpi:192; do
+            dir="${size_dir%%:*}"
+            size="${size_dir##*:}"
+            mkdir -p "android/app/src/main/res/$dir"
+            magick logo-app.png -resize "${size}x${size}!" "android/app/src/main/res/$dir/ic_launcher.png"
+            magick logo-app.png -resize "${size}x${size}!" "android/app/src/main/res/$dir/ic_launcher_round.png"
+          done
+          rm -f android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml
+          rm -f android/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml
 
       - name: Sync Capacitor
         run: npx cap sync android
@@ -67,14 +83,14 @@ jobs:
 
           s = re.sub(
               r'versionCode\s+\d+',
-              'versionCode 9',
+              'versionCode 10',
               s,
               count=1
           )
 
           s = re.sub(
               r'versionName\s+["\'][^"\']+["\']',
-              'versionName "9.0.0"',
+              'versionName "10.0.0"',
               s,
               count=1
           )
@@ -91,7 +107,7 @@ jobs:
       - name: Upload Debug APK
         uses: actions/upload-artifact@v4
         with:
-          name: kifnet-v9-android-debug
+          name: kifnet-v10-android-debug
           path: android/app/build/outputs/apk/debug/*.apk
           if-no-files-found: error
 
@@ -122,6 +138,6 @@ jobs:
         if: env.HAS_RELEASE_SIGNING == 'true'
         uses: actions/upload-artifact@v4
         with:
-          name: kifnet-v9-android-release
+          name: kifnet-v10-android-release
           path: android/app/build/outputs/apk/release/*.apk
           if-no-files-found: error
