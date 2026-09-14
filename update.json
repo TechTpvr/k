@@ -1,0 +1,18 @@
+{
+  "version": "9.0.0",
+  "versionCode": 9,
+  "minimumVersionCode": 1,
+  "forceUpdate": false,
+  "title": "کیف‌نت ۹ منتشر شد",
+  "message": "ظاهر و چیدمان برنامه حفظ شده و تجربه ورود و مسیر بروزرسانی بهتر شده است.",
+  "changes": [
+    "انیمیشن ورود در حالت روشن و تیره نرم‌تر و حرفه‌ای‌تر شد.",
+    "سیستم بروزرسانی از حالت فریز اجباری خارج شد.",
+    "تغییرات هر نسخه داخل خود برنامه نمایش داده می‌شود.",
+    "مسیر ساخت نسخه Android و iOS پایدارتر شد.",
+    "کش نسخه قبلی وب‌اپ هنگام انتشار نسخه جدید کنار گذاشته می‌شود."
+  ],
+  "androidUrl": "https://github.com/TechTpvr/kifapp/releases/latest",
+  "iosUrl": "https://github.com/TechTpvr/kifapp/releases/latest",
+  "webUrl": "https://techtpvr.github.io/kifapp/"
+}
