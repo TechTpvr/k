@@ -52,9 +52,6 @@ jobs:
       - name: Add Capacitor Android
         run: npx cap add android
 
-      - name: Generate Android icons
-        run: npx capacitor-assets generate --iconPath logo-app.png
-
       - name: Sync Capacitor
         run: npx cap sync android
 
