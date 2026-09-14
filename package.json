@@ -1,6 +1,6 @@
 {
   "name": "kifnet",
-  "version": "9.0.0",
+  "version": "10.0.0",
   "private": true,
   "scripts": {
     "build": "vite build",
@@ -16,10 +16,11 @@
     "@capacitor/push-notifications": "^8.0.0"
   },
   "devDependencies": {
-  "@capacitor/android": "^8.0.0",
-  "@capacitor/cli": "^8.0.0",
-  "@capacitor/assets": "^3.0.5",
-  "vite": "^7.1.0",
-  "typescript": "^5.9.2"
+    "@capacitor/android": "^8.0.0",
+    "@capacitor/cli": "^8.0.0",
+    "@capacitor/assets": "^3.0.5",
+    "vite": "^7.1.0",
+    "typescript": "^5.9.2",
+    "vazirmatn": "^33.0.3"
   }
 }

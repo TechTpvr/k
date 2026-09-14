@@ -47,7 +47,7 @@ PushNotifications.addListener('registration', async token => {
   const url = window.KIFNET_NOTIFICATION_CONFIG?.pushRegisterUrl;
   if (!url) return;
   try {
-    await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ token: token.value, platform: Capacitor.getPlatform(), appVersion: '9.0.0' }) });
+    await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ token: token.value, platform: Capacitor.getPlatform(), appVersion: '10.0.0' }) });
   } catch (e) { console.warn('Push token registration failed', e); }
 });
 
