@@ -1,0 +1,2 @@
+// This file documents the signing properties used by the workflow.
+// The workflow injects these values into Gradle through environment variables.
